@@ -1,493 +1,76 @@
-<!doctype html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lee Min-Ru — 個人網站</title>
-  <meta name="description" content="P. Lee 的個人網站與作品集" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💡</text></svg>">
+<!-- 作品精選 -->
+<section id="projects" class="section">
+  <h2>作品精選</h2>
+  <div class="card-grid">
 
-  <style>
-    :root {
-      --bg: #020617;
-      --card: #0f172a;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --accent: #60a5fa;
-      --accent-soft: rgba(96,165,250,0.3);
-      --border-subtle: rgba(148,163,184,0.3);
-      --danger: #f97373;
-      --shadow-soft: 0 18px 45px rgba(15,23,42,0.8);
-      --radius-xl: 18px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif;
-      background: radial-gradient(circle at top, #1d2538 0, #020617 55%, #020617 100%);
-      color: var(--text);
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    a:focus-visible,
-    button:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-
-    main {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 32px 16px 60px;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      margin-bottom: 32px;
-    }
-
-    .logo {
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      font-size: 18px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--muted);
-      text-transform: uppercase;
-    }
-
-    .logo span {
-      color: var(--accent);
-    }
-
-    nav {
-      display: flex;
-      gap: 16px;
-      font-size: 14px;
-    }
-
-    nav a {
-      padding: 6px 10px;
-      border-radius: 999px;
-      color: var(--muted);
-    }
-
-    nav a:hover {
-      background: rgba(15,23,42,0.9);
-      color: var(--text);
-    }
-
-    .section {
-      margin-bottom: 56px;
-    }
-
-    h1, h2, h3 {
-      font-weight: 700;
-      letter-spacing: 0.03em;
-    }
-
-    h1 {
-      font-size: 26px;
-      margin-bottom: 6px;
-    }
-
-    h2 {
-      font-size: 20px;
-      margin-bottom: 18px;
-      border-left: 4px solid var(--accent);
-      padding-left: 10px;
-    }
-
-    h3 {
-      font-size: 17px;
-      margin-bottom: 8px;
-    }
-
-    p {
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .badge {
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.4);
-      color: var(--muted);
-      background: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(15,23,42,0.6));
-    }
-
-    /* 個人照片區 */
-    #profile-card {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-      padding: 20px 20px;
-      border-radius: var(--radius-xl);
-      background:
-        radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 55%),
-        radial-gradient(circle at top right, rgba(96,165,250,0.24), transparent 55%),
-        rgba(15,23,42,0.96);
-      box-shadow: var(--shadow-soft);
-      border: 1px solid var(--border-subtle);
-      margin-bottom: 40px;
-    }
-
-    .avatar-wrap {
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .avatar-ring {
-      position: absolute;
-      inset: -5px;
-      border-radius: 50%;
-      border: 2px dashed rgba(148,163,184,0.5);
-      opacity: 0.7;
-    }
-
-    .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--accent);
-      box-shadow: 0 0 26px rgba(56,189,248,0.5);
-      display: block;
-      background: #0b1120;
-    }
-
-    .profile-text h1 span {
-      color: var(--accent);
-    }
-
-    .profile-sub {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .profile-tagline {
-      font-size: 13px;
-      color: #cbd5f5;
-      margin-bottom: 12px;
-    }
-
-    .hero-links {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 7px 14px;
-      border-radius: 999px;
-      font-size: 13px;
-      border: 1px solid rgba(148,163,184,0.5);
-      color: var(--text);
-      background: radial-gradient(circle at top, rgba(96,165,250,0.2), rgba(15,23,42,0.95));
-      cursor: pointer;
-      transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
-    }
-
-    .btn:hover {
-      border-color: var(--accent);
-      box-shadow: 0 0 18px rgba(96,165,250,0.4);
-      transform: translateY(-1px);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--muted);
-    }
-
-    /* 作品卡片 */
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .card {
-      background: rgba(15,23,42,0.97);
-      border-radius: var(--radius-xl);
-      padding: 16px 16px 18px;
-      border: 1px solid rgba(30,64,175,0.7);
-      box-shadow: 0 12px 30px rgba(15,23,42,0.95);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top left, var(--accent-soft), transparent 60%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .card p {
-      font-size: 13px;
-      margin-bottom: 8px;
-    }
-
-    .card-meta {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
-      list-style: disc;
-      padding-left: 18px;
-      margin-bottom: 10px;
-    }
-
-    .card .btn {
-      font-size: 12px;
-      padding: 5px 11px;
-    }
-
-    /* 關於 / 聯絡 */
-    .about-text p + p {
-      margin-top: 6px;
-    }
-
-    .contact-list {
-      list-style: none;
-      font-size: 14px;
-    }
-
-    .contact-list li + li {
-      margin-top: 4px;
-    }
-
-    footer {
-      margin-top: 30px;
-      font-size: 12px;
-      color: var(--muted);
-      text-align: center;
-      padding-top: 18px;
-      border-top: 1px solid rgba(51,65,85,0.7);
-    }
-
-    /* RWD */
-    @media (max-width: 720px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-      }
-
-      nav {
-        font-size: 13px;
-        flex-wrap: wrap;
-      }
-
-      #profile-card {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .avatar {
-        width: 110px;
-        height: 110px;
-      }
-
-      .card-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <main>
-    <!-- 頂部導覽 -->
-    <header>
-      <div class="logo">
-        <span>PL</span> • Portfolio
-      </div>
-      <nav>
-        <a href="#about">關於</a>
-        <a href="#projects">作品</a>
-        <a href="#contact">聯絡</a>
-      </nav>
-    </header>
-
-    <!-- 個人照片 + 簡介 -->
-    <section id="profile" class="section">
-      <div id="profile-card">
-        <div class="avatar-wrap">
-          <div class="avatar-ring"></div>
-          <!-- 這裡會讀取 profile.jpg -->
-          <img src="profile.jpg" alt="P. Lee Profile Photo" class="avatar">
-        </div>
-        <div class="profile-text">
-          <p class="profile-sub">講師｜產品開發｜研究</p>
-          <h1>你好，我是 <span>P. Lee</span></h1>
-          <p class="profile-tagline">
-            FinTech、ESG、SROI、Python 教學與資料分析。  
-            把研究與產業需求，做成學生跟業界都用得上的工具。
-          </p>
-          <div class="badge-row">
-            <div class="badge">FinTech / Robo-Advisor</div>
-            <div class="badge">ESG &amp; SROI</div>
-            <div class="badge">Python / Data</div>
-            <div class="badge">教學設計</div>
-          </div>
-          <div class="hero-links">
-            <a class="btn" href="https://github.com/pleeminru" target="_blank" rel="noopener">查看 GitHub</a>
-            <a class="btn btn-outline" href="#projects">查看作品精選</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 作品精選 -->
-    <section id="projects" class="section">
-      <h2>作品精選</h2>
-      <div class="card-grid">
-
-        <!-- FRED 作品 -->
-        <div class="card">
-          <h3>📊 FRED 指標擷取與視覺化</h3>
-          <p>
-            使用 Python 自動化擷取 Federal Reserve (FRED) 的經濟數據，
-            並進行資料清洗、可視化（matplotlib / plotly）以及輸出 CSV。
-          </p>
-          <ul class="card-meta">
-            <li>技術：Python、pandas、requests、FRED API</li>
-            <li>功能：自動抓取 → 整併 → 顯示趨勢圖</li>
-            <li>用途：教學示範與研究用數據分析流程</li>
-          </ul>
-          <a class="btn" href="#" target="_blank">查看程式碼</a>
-        </div>
-
-        <!-- LINE@ -->
-        <div class="card">
-          <h3>🤖 LINE@ 智能股市助教</h3>
-          <p>
-            幫助學生快速查詢財報、股價與法人動向的 LINE Bot。
-            內含 API 串接、資料解析、回傳排版等功能。
-          </p>
-          <ul class="card-meta">
-            <li>技術：Python、LINE Messaging API、FinMind</li>
-            <li>功能：財報查詢、K 線、法人買賣、即時資訊輔助教學</li>
-            <li>用途：課堂助教工具、股票教學輔助</li>
-          </ul>
-          <a class="btn" href="#" target="_blank">查看程式碼</a>
-        </div>
-
-        <!-- USR Hub -->
-        <div class="card">
-          <h3>🌱 USR-Hub 永續教材</h3>
-          <p>
-            將自然碳匯（樹木、土壤）與 SROI（社會報酬率）融入教學，
-            結合計算模型、學習單、量化模組。
-          </p>
-          <ul class="card-meta">
-            <li>技術：Excel 模組、SROI 模型、資料分析</li>
-            <li>功能：碳匯試算、社會價值量化、課程練習</li>
-            <li>用途：USR 永續課程、跨領域教學</li>
-          </ul>
-          <a class="btn" href="#" target="_blank">教材預覽</a>
-        </div>
-
-        <!-- AI 模型作品 -->
-        <div class="card">
-          <h3>🧠 AI 模型：多來源金融資料風控系統</h3>
-          <p>
-            建立以 AI 驅動的金融風險控管模型，整合帳戶資料、消費紀錄、KYC + 行為特徵，
-            進行授信風險預測與異常偵測。
-          </p>
-          <ul class="card-meta">
-            <li>技術：Python、XGBoost、Embedding、AWS Lambda</li>
-            <li>功能：授信風險分析、異常交易偵測、特徵工程</li>
-            <li>用途：借貸媒合平台、新住民小額貸款評估</li>
-          </ul>
-          <a class="btn" href="#" target="_blank">模型說明</a>
-        </div>
-
-        <!-- SROI 計算器 -->
-        <div class="card">
-          <h3>📐 SROI 自動化計算器</h3>
-          <p>
-            建立一套可自動讀取資料、判斷 Stakeholder、輸出 SROI 報表的系統。
-          </p>
-          <ul class="card-meta">
-            <li>技術：Python、pandas、Excel API、自動化報表</li>
-            <li>功能：成本項目分析、效益貨幣化、最終 SROI 計算</li>
-            <li>用途：專題 / USR / 企業 ESG 報告</li>
-          </ul>
-          <a class="btn" href="#" target="_blank">查看範例報表</a>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- 關於我 -->
-    <section id="about" class="section">
-      <h2>關於我</h2>
-      <div class="about-text">
-        <p>
-          兼任講師與產品開發，關注金融科技（FinTech）、資料分析、ESG 與 SROI。
-          習慣把「研究成果」變成「真的用得到的系統與教材」給學生與產業端使用。
-        </p>
-        <p>
-          過去參與基金回測系統、風控模組、教學平台開發，也協助大專院校與高中設計課程，
-          連結實務資料、實作專題與競賽。
-        </p>
-      </div>
-    </section>
-
-    <!-- 聯絡 -->
-    <section id="contact" class="section">
-      <h2>聯絡</h2>
-      <ul class="contact-list">
-        <li>Email：<a href="mailto:pleeminru@gmail.com">pleeminru@gmail.com</a></li>
-        <li>GitHub：<a href="https://github.com/pleeminru" target="_blank" rel="noopener">@pleeminru</a></li>
+    <!-- FRED 作品 -->
+    <div class="card">
+      <h3>📊 FRED 指標擷取與視覺化</h3>
+      <p>
+        使用 Python 自動化擷取 Federal Reserve (FRED) 的經濟數據，
+        並進行資料清洗、可視化（matplotlib / plotly）以及輸出 CSV。
+      </p>
+      <ul class="card-meta">
+        <li>技術：Python、pandas、requests、FRED API</li>
+        <li>功能：自動抓取 → 整併 → 顯示趨勢圖</li>
+        <li>用途：教學示範與研究用數據分析流程</li>
       </ul>
-    </section>
+    </div>
 
-    <footer>
-      © P. Lee. 使用 GitHub Pages 發佈。
-    </footer>
-  </main>
-</body>
-</html>
+    <!-- LINE@ -->
+    <div class="card">
+      <h3>🤖 LINE@ 智能股市助教</h3>
+      <p>
+        幫助學生快速查詢財報、股價與法人動向的 LINE Bot。
+        內含 API 串接、資料解析、回傳排版等功能。
+      </p>
+      <ul class="card-meta">
+        <li>技術：Python、LINE Messaging API、FinMind</li>
+        <li>功能：財報查詢、K 線、法人買賣、即時資訊輔助教學</li>
+        <li>用途：課堂助教工具、股票教學輔助</li>
+      </ul>
+    </div>
 
+    <!-- USR Hub -->
+    <div class="card">
+      <h3>🌱 USR-Hub 永續教材</h3>
+      <p>
+        將自然碳匯（樹木、土壤）與 SROI（社會報酬率）融入教學，
+        結合計算模型、學習單、量化模組。
+      </p>
+      <ul class="card-meta">
+        <li>技術：Excel 模組、SROI 模型、資料分析</li>
+        <li>功能：碳匯試算、社會價值量化、課程練習</li>
+        <li>用途：USR 永續課程、跨領域教學</li>
+      </ul>
+    </div>
+
+    <!-- AI 模型作品 -->
+    <div class="card">
+      <h3>🧠 AI 模型：多來源金融資料風控系統</h3>
+      <p>
+        建立以 AI 驅動的金融風險控管模型，整合帳戶資料、消費紀錄、KYC + 行為特徵，
+        進行授信風險預測與異常偵測。
+      </p>
+      <ul class="card-meta">
+        <li>技術：Python、XGBoost、Embedding、AWS Lambda</li>
+        <li>功能：授信風險分析、異常交易偵測、特徵工程</li>
+        <li>用途：借貸媒合平台、新住民小額貸款評估</li>
+      </ul>
+    </div>
+
+    <!-- SROI 計算器 -->
+    <div class="card">
+      <h3>📐 SROI 自動化計算器</h3>
+      <p>
+        建立一套可自動讀取資料、判斷 Stakeholder、輸出 SROI 報表的系統。
+      </p>
+      <ul class="card-meta">
+        <li>技術：Python、pandas、Excel API、自動化報表</li>
+        <li>功能：成本項目分析、效益貨幣化、最終 SROI 計算</li>
+        <li>用途：專題 / USR / 企業 ESG 報告</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
