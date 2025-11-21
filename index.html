@@ -27,6 +27,10 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif;
       background: radial-gradient(circle at top, #1d2538 0, #020617 55%, #020617 100%);
@@ -38,6 +42,12 @@
     a {
       color: var(--accent);
       text-decoration: none;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
 
     main {
@@ -140,9 +150,10 @@
       align-items: center;
       padding: 20px 20px;
       border-radius: var(--radius-xl);
-      background: radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 55%) ,
-                  radial-gradient(circle at top right, rgba(96,165,250,0.24), transparent 55%) ,
-                  rgba(15,23,42,0.96);
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 55%),
+        radial-gradient(circle at top right, rgba(96,165,250,0.24), transparent 55%),
+        rgba(15,23,42,0.96);
       box-shadow: var(--shadow-soft);
       border: 1px solid var(--border-subtle);
       margin-bottom: 40px;
@@ -207,11 +218,13 @@
       color: var(--text);
       background: radial-gradient(circle at top, rgba(96,165,250,0.2), rgba(15,23,42,0.95));
       cursor: pointer;
+      transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
     }
 
     .btn:hover {
       border-color: var(--accent);
       box-shadow: 0 0 18px rgba(96,165,250,0.4);
+      transform: translateY(-1px);
     }
 
     .btn-outline {
@@ -255,7 +268,10 @@
       margin-bottom: 8px;
     }
 
-    .card ul {
+    .card-meta {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
       list-style: disc;
       padding-left: 18px;
       margin-bottom: 10px;
@@ -350,7 +366,7 @@
           </p>
           <div class="badge-row">
             <div class="badge">FinTech / Robo-Advisor</div>
-            <div class="badge">ESG & SROI</div>
+            <div class="badge">ESG &amp; SROI</div>
             <div class="badge">Python / Data</div>
             <div class="badge">教學設計</div>
           </div>
@@ -374,7 +390,7 @@
             使用 Python 自動化擷取 Federal Reserve (FRED) 的經濟數據，
             並進行資料清洗、可視化（matplotlib / plotly）以及輸出 CSV。
           </p>
-          <ul style="color: var(--muted); font-size: 13px; line-height: 1.6;">
+          <ul class="card-meta">
             <li>技術：Python、pandas、requests、FRED API</li>
             <li>功能：自動抓取 → 整併 → 顯示趨勢圖</li>
             <li>用途：教學示範與研究用數據分析流程</li>
@@ -389,7 +405,7 @@
             幫助學生快速查詢財報、股價與法人動向的 LINE Bot。
             內含 API 串接、資料解析、回傳排版等功能。
           </p>
-          <ul style="color: var(--muted); font-size: 13px; line-height: 1.6;">
+          <ul class="card-meta">
             <li>技術：Python、LINE Messaging API、FinMind</li>
             <li>功能：財報查詢、K 線、法人買賣、即時資訊輔助教學</li>
             <li>用途：課堂助教工具、股票教學輔助</li>
@@ -404,7 +420,7 @@
             將自然碳匯（樹木、土壤）與 SROI（社會報酬率）融入教學，
             結合計算模型、學習單、量化模組。
           </p>
-          <ul style="color: var(--muted); font-size: 13px; line-height: 1.6;">
+          <ul class="card-meta">
             <li>技術：Excel 模組、SROI 模型、資料分析</li>
             <li>功能：碳匯試算、社會價值量化、課程練習</li>
             <li>用途：USR 永續課程、跨領域教學</li>
@@ -419,7 +435,7 @@
             建立以 AI 驅動的金融風險控管模型，整合帳戶資料、消費紀錄、KYC + 行為特徵，
             進行授信風險預測與異常偵測。
           </p>
-          <ul style="color: var(--muted); font-size: 13px; line-height: 1.6;">
+          <ul class="card-meta">
             <li>技術：Python、XGBoost、Embedding、AWS Lambda</li>
             <li>功能：授信風險分析、異常交易偵測、特徵工程</li>
             <li>用途：借貸媒合平台、新住民小額貸款評估</li>
@@ -433,7 +449,7 @@
           <p>
             建立一套可自動讀取資料、判斷 Stakeholder、輸出 SROI 報表的系統。
           </p>
-          <ul style="color: var(--muted); font-size: 13px; line-height: 1.6;">
+          <ul class="card-meta">
             <li>技術：Python、pandas、Excel API、自動化報表</li>
             <li>功能：成本項目分析、效益貨幣化、最終 SROI 計算</li>
             <li>用途：專題 / USR / 企業 ESG 報告</li>
