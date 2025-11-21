@@ -1,172 +1,80 @@
-<!doctype html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>P. Lee — 個人網站</title>
-  <meta name="description" content="P. Lee 的個人網站與作品集" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💡</text></svg>">
-  <style>
-    :root {
-      --bg: #0b1220;
-      --card: #111827;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --accent: #60a5fa;
-      --ring: #1f2937;
-    }
+<section id="projects" class="section">
+  <h2>作品精選</h2>
+  <div class="card-grid">
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
+    <!-- FRED 作品 -->
+    <div class="card">
+      <h3>📊 FRED 指標擷取與視覺化</h3>
+      <p>
+        使用 Python 自動化擷取 Federal Reserve (FRED) 的經濟數據，
+        並進行資料清洗、可視化（matplotlib / plotly）以及輸出 CSV。
+      </p>
+      <ul style="color: var(--muted); font-size: 13px; line-height: 1.6;">
+        <li>技術：Python、pandas、requests、FRED API</li>
+        <li>功能：自動抓取 → 整併 → 顯示趨勢圖</li>
+        <li>用途：教學示範與研究用數據分析流程</li>
+      </ul>
+      <a class="btn" href="#" target="_blank">查看程式碼</a>
+    </div>
 
-    body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans TC", Arial, sans-serif;
-      color: var(--text);
-      background: radial-gradient(1200px 800px at 70% -10%, #1f2937 0%, var(--bg) 60%);
-    }
+    <!-- LINE@ -->
+    <div class="card">
+      <h3>🤖 LINE@ 智能股市助教</h3>
+      <p>
+        幫助學生快速查詢財報、股價與法人動向的 LINE Bot。
+        內含 API 串接、資料解析、回傳排版等功能。
+      </p>
+      <ul style="color: var(--muted); font-size: 13px; line-height: 1.6;">
+        <li>技術：Python、LINE Messaging API、FinMind</li>
+        <li>功能：財報查詢、K 線、法人買賣、即時資訊輔助教學</li>
+        <li>用途：課堂助教工具、股票教學輔助</li>
+      </ul>
+      <a class="btn" href="#" target="_blank">查看程式碼</a>
+    </div>
 
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    <!-- USR Hub -->
+    <div class="card">
+      <h3>🌱 USR-Hub 永續教材</h3>
+      <p>
+        將自然碳匯（樹木、土壤）與 SROI（社會報酬率）融入教學，
+        結合計算模型、學習單、量化模組。
+      </p>
+      <ul style="color: var(--muted); font-size: 13px; line-height: 1.6;">
+        <li>技術：Excel 模組、SROI 模型、資料分析</li>
+        <li>功能：碳匯試算、社會價值量化、課程練習</li>
+        <li>用途：USR 永續課程、跨領域教學</li>
+      </ul>
+      <a class="btn" href="#" target="_blank">教材預覽</a>
+    </div>
 
-    .wrap { max-width: 1000px; margin: 0 auto; padding: 32px 20px 64px; }
+    <!-- 新增：AI 模型作品 -->
+    <div class="card">
+      <h3>🧠 AI 模型：多來源金融資料風控系統</h3>
+      <p>
+        建立以 AI 驅動的金融風險控管模型，整合帳戶資料、消費紀錄、KYC + 行為特徵，
+        進行授信風險預測與異常偵測。
+      </p>
+      <ul style="color: var(--muted); font-size: 13px; line-height: 1.6;">
+        <li>技術：Python、XGBoost、Embedding、AWS Lambda</li>
+        <li>功能：授信風險分析、異常交易偵測、特徵工程</li>
+        <li>用途：借貸媒合平台、新住民小額貸款評估</li>
+      </ul>
+      <a class="btn" href="#" target="_blank">模型說明</a>
+    </div>
 
-    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-    .nav h1 { font-size: 20px; margin: 0; letter-spacing: .5px; }
-    .nav .links a { margin-left: 16px; font-size: 14px; color: var(--muted); }
-
-    /* --- Hero Section --- */
-    .hero { 
-        margin: 56px 0 32px; 
-        display: grid; 
-        grid-template-columns: 1fr 1fr; 
-        gap: 32px; 
-        align-items: center; 
-    }
-    .hero h2 { font-size: clamp(28px, 4vw, 40px); margin: 0 0 12px; }
-    .hero p { color: var(--muted); margin: 0 0 16px; }
-
-    .avatar-container {
-        display: flex;
-        justify-content: center;
-    }
-    .avatar {
-        width: 220px;
-        height: 220px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 4px solid var(--ring);
-        box-shadow: 0 0 20px rgba(0,0,0,.4);
-    }
-
-    .btns { display: flex; gap: 12px; flex-wrap: wrap; }
-    .btn {
-        padding: 10px 14px;
-        border-radius: 10px;
-        border: 1px solid var(--ring);
-        background: linear-gradient(180deg, #1f2937, #111827);
-        color: var(--text);
-    }
-    .btn.primary {
-        background: linear-gradient(180deg, #2563eb, #1d4ed8);
-        border-color: #1e40af;
-    }
-
-    /* Cards */
-    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 24px; }
-    .card { background: linear-gradient(180deg, #121826, #0f172a); border: 1px solid var(--ring); border-radius: 14px; padding: 18px; }
-
-    .card h3 { margin: 0 0 8px; font-size: 18px; }
-    .card p { margin: 0; color: var(--muted); font-size: 14px; }
-
-    /* Sections */
-    .section { margin-top: 48px; }
-    .section h2 { font-size: 20px; margin-bottom: 10px; }
-
-    .list { display: grid; gap: 10px; }
-    .item { background: var(--card); border: 1px solid var(--ring); border-radius: 10px; padding: 12px 14px; }
-
-    /* Footer */
-    footer { margin-top: 56px; color: var(--muted); font-size: 14px; text-align: center; }
-
-    @media (max-width: 800px) {
-      .hero { grid-template-columns: 1fr; }
-      .avatar { width: 180px; height: 180px; }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="wrap">
-
-    <nav class="nav">
-      <h1>pleeminru • GitHub Pages</h1>
-      <div class="links">
-        <a href="#about">關於</a>
-        <a href="#projects">作品</a>
-        <a href="#contact">聯絡</a>
-      </div>
-    </nav>
-
-    <header class="hero">
-      <!-- Left Content -->
-      <div>
-        <h2>你好，我是 P. Lee 👋</h2>
-        <p>講師｜產品開發｜研究：FinTech、ESG、SROI、Python 教學與資料分析。</p>
-        <div class="btns">
-          <a class="btn primary" href="https://github.com/pleeminru" target="_blank">GitHub</a>
-          <a class="btn" href="#projects">查看作品</a>
-        </div>
-      </div>
-
-      <!-- Right Avatar -->
-      <div class="avatar-container">
-        <img src="/assets/profile.jpg" class="avatar" alt="profile photo">
-      </div>
-    </header>
-
-    <section id="projects" class="section">
-      <h2>作品精選</h2>
-      <div class="card-grid">
-        <div class="card">
-          <h3>📊 FRED 指標擷取與視覺化</h3>
-          <p>以 Python 擷取經濟指標並產製圖表與 CSV。</p>
-        </div>
-        <div class="card">
-          <h3>🤖 LINE@ 智能股市助教</h3>
-          <p>協助學生即時查詢財報與股市資料的工具。</p>
-        </div>
-        <div class="card">
-          <h3>🌱 USR-Hub 永續教材</h3>
-          <p>自然碳匯與 SROI 教材整合。</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="section">
-      <h2>關於我</h2>
-      <div class="list">
-        <div class="item">兼任講師與產品開發，關注金融科技、資料分析與永續議題。</div>
-        <div class="item">擅長將研究與產業案例轉化為教材與工具。</div>
-      </div>
-    </section>
-
-    <section id="contact" class="section">
-      <h2>聯絡</h2>
-      <div class="list">
-        <div class="item">Email：<a href="mailto:pleeminru@gmail.com">pleeminru@gmail.com</a></div>
-        <div class="item">GitHub：<a href="https://github.com/pleeminru">@pleeminru</a></div>
-      </div>
-    </section>
-
-    <footer>
-      <p>© <span id="year"></span> P. Lee. 使用 GitHub Pages 發佈。</p>
-    </footer>
+    <!-- 新增：Line SROI 計算器 -->
+    <div class="card">
+      <h3>📐 SROI 自動化計算器</h3>
+      <p>
+        建立一套可自動讀取資料、判斷 Stakeholder、輸出 SROI 報表的系統。
+      </p>
+      <ul style="color: var(--muted); font-size: 13px; line-height: 1.6;">
+        <li>技術：Python、pandas、Excel API、自動化報表</li>
+        <li>功能：成本項目分析、效益貨幣化、最終 SROI 計算</li>
+        <li>用途：專題 / USR / 企業 ESG 報告</li>
+      </ul>
+      <a class="btn" href="#" target="_blank">查看範例報表</a>
+    </div>
 
   </div>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+</section>
